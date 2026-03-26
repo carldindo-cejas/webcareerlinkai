@@ -23,6 +23,7 @@ export default function ProfilePage({ profile, onUpdateGrades, onUpdateStrand, o
 
   useEffect(() => {
     if (profile) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setGrades(profile.grades);
       setStrand(profile.strand);
     }
@@ -85,7 +86,7 @@ export default function ProfilePage({ profile, onUpdateGrades, onUpdateStrand, o
                 <h3 className="text-lg font-medium text-white">Mathematics</h3>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {GRADE_LEVELS.map(level => (
+                {GRADE_LEVELS.map((level, index) => (
                   <div key={`math-${level}`}>
                     <label className="block text-xs text-[#A7ACB8] mb-2">
                       Grade {level}
@@ -96,8 +97,17 @@ export default function ProfilePage({ profile, onUpdateGrades, onUpdateStrand, o
                       max="100"
                       value={grades.math[level] || ''}
                       onChange={(e) => handleGradeChange('math', level, e.target.value)}
+                      onKeyDown={(e) => {
+                        if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+                          e.preventDefault();
+                        }
+                        if (e.key === 'Enter') {
+                          handleSave();
+                        }
+                      }}
                       placeholder="--"
                       className="input-glass text-center"
+                      autoFocus={index === 0}
                     />
                   </div>
                 ))}
@@ -124,6 +134,14 @@ export default function ProfilePage({ profile, onUpdateGrades, onUpdateStrand, o
                       max="100"
                       value={grades.english[level] || ''}
                       onChange={(e) => handleGradeChange('english', level, e.target.value)}
+                      onKeyDown={(e) => {
+                        if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+                          e.preventDefault();
+                        }
+                        if (e.key === 'Enter') {
+                          handleSave();
+                        }
+                      }}
                       placeholder="--"
                       className="input-glass text-center"
                     />
@@ -152,6 +170,14 @@ export default function ProfilePage({ profile, onUpdateGrades, onUpdateStrand, o
                       max="100"
                       value={grades.science[level] || ''}
                       onChange={(e) => handleGradeChange('science', level, e.target.value)}
+                      onKeyDown={(e) => {
+                        if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+                          e.preventDefault();
+                        }
+                        if (e.key === 'Enter') {
+                          handleSave();
+                        }
+                      }}
                       placeholder="--"
                       className="input-glass text-center"
                     />

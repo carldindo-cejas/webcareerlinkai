@@ -30,15 +30,15 @@ export default function RIASECSection({ onPreviewQuestions }: RIASECSectionProps
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=90%',
+          end: '+=85%',
           pin: true,
-          scrub: 0.3,
+          scrub: 0.25,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         }
       });
 
-      // ENTRANCE (0% - 30%)
+      // ENTRANCE (0% - 25%)
       scrollTl.fromTo(textBlock,
         { x: '-45vw', opacity: 0 },
         { x: 0, opacity: 1, ease: 'power2.out' },
@@ -55,11 +55,11 @@ export default function RIASECSection({ onPreviewQuestions }: RIASECSectionProps
       const chipElements = chips.querySelectorAll('.riasec-chip');
       scrollTl.fromTo(chipElements,
         { y: '8vh', scale: 0.9, opacity: 0 },
-        { y: 0, scale: 1, opacity: 1, stagger: 0.02, ease: 'power2.out' },
-        0.12
+        { y: 0, scale: 1, opacity: 1, stagger: 0.01, ease: 'power2.out' },
+        0.08
       );
 
-      // SETTLE (30% - 70%) - hold
+      // SETTLE (25% - 70%) - hold
 
       // EXIT (70% - 100%)
       scrollTl.fromTo(textBlock,
@@ -93,8 +93,9 @@ export default function RIASECSection({ onPreviewQuestions }: RIASECSectionProps
       {/* Left Text Block */}
       <div
         ref={textBlockRef}
-        className="absolute left-[7vw] top-1/2 -translate-y-1/2
-                   w-[36vw] max-w-[480px] opacity-0"
+        className="absolute top-1/2 -translate-y-1/2
+                   left-[5vw] w-[90vw] md:left-[7vw] md:w-[36vw]
+                   max-w-[480px] opacity-0"
       >
         <div className="micro-label mb-4 flex items-center gap-2">
           <ClipboardList className="w-3.5 h-3.5 text-[#4F46E5]" />
@@ -119,8 +120,9 @@ export default function RIASECSection({ onPreviewQuestions }: RIASECSectionProps
       {/* Right Card */}
       <div
         ref={cardRef}
-        className="glass-card absolute left-[52vw] top-1/2 -translate-y-1/2
-                   w-[42vw] max-w-[580px] h-[62vh] max-h-[640px]
+        className="glass-card absolute top-1/2 -translate-y-1/2
+                   left-[5vw] w-[90vw] md:left-[52vw] md:w-[42vw]
+                   max-w-[580px] h-[62vh] max-h-[640px]
                    overflow-hidden opacity-0"
         style={{ perspective: '1000px' }}
       >

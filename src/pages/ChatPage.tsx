@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Sparkles, Lightbulb } from 'lucide-react';
+import { Send, Bot, User, Sparkles, Lightbulb, ArrowLeft } from 'lucide-react';
 import type { ChatMessage } from '@/types';
 
 interface ChatPageProps {
   userName: string;
   riasecProfile?: string;
+  onNavigate?: (page: string) => void;
 }
 
 const SUGGESTED_QUESTIONS = [
@@ -15,7 +16,7 @@ const SUGGESTED_QUESTIONS = [
   "What scholarships are available?",
 ];
 
-export default function ChatPage({ userName, riasecProfile }: ChatPageProps) {
+export default function ChatPage({ userName, riasecProfile, onNavigate }: ChatPageProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',
@@ -125,6 +126,15 @@ Could you tell me more about what specific aspect you'd like to explore? Or feel
       <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
+          {onNavigate && (
+            <button
+              onClick={() => onNavigate('landing')}
+              className="btn-ghost p-2 -ml-2"
+              title="Go back"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+          )}
           <div className="w-12 h-12 rounded-2xl bg-[#4F46E5]/10 flex items-center justify-center">
             <Bot className="w-6 h-6 text-[#4F46E5]" />
           </div>

@@ -102,7 +102,10 @@ function LandingPage({ onNavigate }: { onNavigate: (page: string) => void }) {
 
 // Main App Content
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState('landing');
+  const [currentPage, setCurrentPage] = useState<string>(() => {
+    // Initialize from history state if available
+    return (window.history.state?.page as string) || 'landing';
+  });
   const { 
     user, 
     isAuthenticated, 
@@ -124,7 +127,20 @@ function AppContent() {
   // Handle navigation
   const handleNavigate = useCallback((page: string) => {
     setCurrentPage(page);
+    window.history.pushState({ page }, '', window.location.pathname);
     window.scrollTo(0, 0);
+  }, []);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const page = event.state?.page || 'landing';
+      setCurrentPage(page);
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   // Handle assessment completion
@@ -239,6 +255,7 @@ function AppContent() {
         return (
           <AssessmentPage
             onComplete={handleAssessmentComplete}
+            onNavigate={handleNavigate}
           />
         );
 
@@ -270,6 +287,7 @@ function AppContent() {
           <ChatPage
             userName={user?.name || 'Student'}
             riasecProfile={profile ? getTopRIASECCodes(profile.riasecScores).join('') : undefined}
+            onNavigate={handleNavigate}
           />
         );
 

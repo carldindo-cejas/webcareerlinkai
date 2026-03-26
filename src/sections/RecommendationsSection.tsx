@@ -97,8 +97,9 @@ export default function RecommendationsSection({ onSeeExample }: Recommendations
       {/* Left Card */}
       <div
         ref={cardRef}
-        className="glass-card absolute left-[7vw] top-1/2 -translate-y-1/2
-                   w-[44vw] max-w-[580px] h-[62vh] max-h-[640px]
+        className="glass-card absolute top-1/2 -translate-y-1/2
+                   left-[5vw] w-[90vw] md:left-[7vw] md:w-[44vw]
+                   max-w-[580px] h-[62vh] max-h-[640px]
                    overflow-hidden opacity-0"
         style={{ perspective: '1000px' }}
       >
@@ -140,8 +141,9 @@ export default function RecommendationsSection({ onSeeExample }: Recommendations
       {/* Right Text Block */}
       <div
         ref={textBlockRef}
-        className="absolute left-[58vw] top-1/2 -translate-y-1/2
-                   w-[34vw] max-w-[460px] opacity-0"
+        className="absolute top-1/2 -translate-y-1/2
+                   left-[5vw] w-[90vw] md:left-[58vw] md:w-[34vw]
+                   max-w-[460px] opacity-0"
       >
         <div className="micro-label mb-4 flex items-center gap-2">
           <Lightbulb className="w-3.5 h-3.5 text-[#4F46E5]" />
